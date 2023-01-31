@@ -3,57 +3,58 @@
 // элементов массива.
 
 // [3 7 22 2 78] -> 76
-using System;
 
-class Program {
-  public static void Main (string[] args) {
-    /*Задача 38: Задайте массив вещественных чисел. Найдите разницу 
-            между максимальным и минимальным элементов массива.
-            [3 7 22 2 78] -> 76
-            */
 
-            int Find_Min_Max_diff(int[] array)
-            {
-                int result = 0;
-                int min = 0;
-                int max = 0;
 
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (array[min] > array[i])
-                        min = i;
-                    else if (array[max] < array[i])
-                        max = i;
-                }
-                Console.WriteLine("min= " + array[min] + "\tmax= " + array[max]);
-                if (array[min] > array[max])
-                    result = array[min] - array[max];
-                else if (array[max] > array[min])
-                    result = array[max] - array[min];
-                return result;
-            }
-             Console.Write("введите размер массива: ");
-            int size = Convert.ToInt32(Console.ReadLine());
-            int[] array = new int[size];
-            Console.Write("введите минимальное значение: ");
-            int Min = Convert.ToInt32(Console.ReadLine());
-            Console.Write("введите максимальное значение: ");
-            int Max = Convert.ToInt32(Console.ReadLine());
-            int temp = 0;
-            if (Min > Max)
-            {
-                temp = Max;
-                Max = Min;
-                Min = temp;
-            }
-            Random rand = new Random();
-            for (int i = 0; i < array.Length; i++)
-                array[i] = rand.Next(Min, Max);
-            for (int i = 0; i < array.Length; i++)
-                Console.Write(array[i] + "\t");
-            
-
-            Console.WriteLine("разница между минимальным и максимальным элементом массива=" + Find_Min_Max_diff(array));
-  }
+int Subtract(int[] array)
+{
+    int result = 0;
+    int min = array[0];
+    int max = array[0];
+    for (int index = 0; index < array.Length; index++)
+    {
+        if (array[index] < min)
+        {
+            min = array[index];
+        }
+        if (array[index] > max)
+        {
+            max = array[index];
+        }
+    }
+    result = max - min;
+    return result;
 }
-  
+
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (i == 0) Console.Write($"[{array[i]}, ");
+        else if (i == (array.Length - 1)) Console.Write($"{array[i]}]");
+        else Console.Write($"{array[i]}, ");
+    }
+}
+
+int[] GetArray(int size, int min, int max)
+{
+    int[] arr = new int[size];
+    for (int index = 0; index < size; index++)
+    {
+        arr[index] = new Random().Next(min, max + 1);
+    }
+    return arr;
+}
+
+int GetSize(string text)
+{
+    Console.WriteLine(text);
+    int size = int.Parse(Console.ReadLine());
+    return size;
+}
+
+int size = GetSize("Введите размер массива:");
+int[] array = GetArray(size, 0, 100);
+PrintArray(array);
+int result = Subtract(array);
+Console.Write($" -> {result}");
