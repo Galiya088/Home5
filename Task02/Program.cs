@@ -4,7 +4,7 @@
 // [3, 7, 23, 12] -> 19
 // [-4, -6, 89, 6] -> 0
 
-int OddSumm(int[] array)
+int SumArr(int[] array)
 {
     int result = 0;
     for (int index = 0; index < array.Length; index++)
@@ -37,15 +37,15 @@ int[] GetArray(int size, int min, int max)
     return arr;
 }
 
-int GetSize(string text)
+int GetNum(string text)
 {
     Console.WriteLine(text);
     int size = int.Parse(Console.ReadLine());
     return size;
 }
 
-int size = GetSize("Введите размер массива:");
+int size = GetNum("Введите размер массива:");
 int[] array = GetArray(size, -100, 100);
 PrintArray(array);
-int result = OddSumm(array);
+int result = SumArr(array);
 Console.Write($" -> {result}");
